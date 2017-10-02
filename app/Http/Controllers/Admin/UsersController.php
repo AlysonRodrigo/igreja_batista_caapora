@@ -63,8 +63,6 @@ class UsersController extends Controller
     public function show(User $user)
     {
 
-        //dd($user->images);
-
         return view('admin.users.detalhes',compact('user'));
     }
 
