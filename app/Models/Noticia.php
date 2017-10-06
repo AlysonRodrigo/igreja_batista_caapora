@@ -19,7 +19,7 @@ class Noticia extends Model implements TableInterface
      */
     public function getTableHeaders()
     {
-        return ['#','Titulo','Data cadastro','Data atualizacao'];
+        return ['#','Titulo'];
     }
 
     /**
@@ -36,11 +36,6 @@ class Noticia extends Model implements TableInterface
                 return $this->id;
             case 'Titulo':
                 return $this->titulo;
-            case 'Data cadastro':
-                return $this->created_at;
-            case 'Data atualizacao':
-                return $this->updated_at;
-
         }
     }
 }

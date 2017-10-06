@@ -17,23 +17,15 @@
                 <tbody>
                 <tr>
                     <th scope="row">ID</th>
-                    <td>{{$noticia->id}}</td>
+                    <td>{{ $noticia->id }} </td>
                 </tr>
                 <tr>
                     <th scope="row">Titulo</th>
-                    <td>{{$noticia->titulo}}</td>
+                    <td>{{ $noticia->titulo }}</td>
                 </tr>
                 <tr>
                     <th scope="row">Descricao</th>
-                    <td>{{$noticia->descricao}}</td>
-                </tr>
-                <tr>
-                    <th scope="row">Data de cadastro</th>
-                    <td>{{$noticia->created_at}}</td>
-                </tr>
-                <tr>
-                    <th scope="row">Ultima atualização</th>
-                    <td>{{$noticia->updated_at}}</td>
+                    <td>{{ $noticia->descricao }}</td>
                 </tr>
                 </tbody>
             </table>

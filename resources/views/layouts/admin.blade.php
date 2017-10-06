@@ -48,7 +48,7 @@
                                 <li>
                                     <a href="{{ route('admin.agenda.index') }}">Agenda</a>
                                     <a href="{{ route('admin.noticia.index') }}">Noticias</a>
-                                    <a href="{{ route('admin.users.index') }}">Aniversariantes do mês</a>
+                                    <a href="{{ route('admin.aniversariante.index') }}">Aniversariantes do mês</a>
                                 </li>
                             </ul>
                         </li>
