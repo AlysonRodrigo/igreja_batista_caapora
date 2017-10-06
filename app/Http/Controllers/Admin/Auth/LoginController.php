@@ -52,4 +52,11 @@ class LoginController extends Controller
     {
         return view('admin.auth.login');
     }
+
+    protected function credentials(Request $request)
+    {
+        $data = $request->only($this->username(), 'password');
+        $data['role'] = User::ROLE_ADMIN;
+        return $data;
+    }
 }

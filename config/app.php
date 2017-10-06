@@ -232,7 +232,8 @@ return [
         'Icon' => Bootstrapper\Facades\Icon::class,
         'Panel' => Bootstrapper\Facades\Panel::class,
         'Navigation' => Bootstrapper\Facades\Navigation::class,
-        'FormBuilder' => Kris\LaravelFormBuilder\Facades\FormBuilder::class
+        'FormBuilder' => Kris\LaravelFormBuilder\Facades\FormBuilder::class,
+        'Alert' => Bootstrapper\Facades\Alert::class,
 
     ],
 

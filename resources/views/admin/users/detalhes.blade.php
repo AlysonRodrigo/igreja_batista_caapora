@@ -9,7 +9,7 @@
                         <img src="{{ url('/uploads/'.$user->images[0]->id.'.'.$user->images[0]->extension) }}"
                              name="aboutme" width="140" height="140" border="0" class="img-circle"></a>
                 @else
-                    <img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRbezqZpEuwGSvitKy3wrwnth5kysKdRqBW54cAszm_wiutku3R"
+                    <img src="{{ url('/uploads/profile.gif') }}"
                          name="aboutme" width="140" height="140" border="0" class="img-circle"></a>
                     @endif
                     </a>
@@ -32,7 +32,7 @@
                                 <img src="{{ url('/uploads/'.$user->images[0]->id.'.'.$user->images[0]->extension) }}"
                                      name="aboutme" width="140" height="140" border="0" class="img-circle"></a>
                             @else
-                                <img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRbezqZpEuwGSvitKy3wrwnth5kysKdRqBW54cAszm_wiutku3R"
+                                <img src="{{ url('/uploads/profile.gif') }}"
                                      name="aboutme" width="140" height="140" border="0" class="img-circle"></a>
                             @endif
                             <h3 class="media-heading">{{ $user->name  }},
@@ -44,8 +44,36 @@
                         <hr>
                         <center>
                             <p class="text-left"><strong>Informação de endereço: </strong><br>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut sem dui, tempor sit amet
-                                commodo a, vulputate vel tellus.</p>
+                                @if($user->profile == null)
+                                    {{ "Nenhum registro de endereço encontrado!" }}
+                                @else
+                                    <table class="table table-bordered">
+                                        <tbody>
+                                        <tr>
+                                            <th scope="row">UF</th>
+                                            <td>{{$user->profile->uf}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">CEP</th>
+                                            <td>{{$user->profile->cep}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">CIDADE</th>
+                                            <td>{{$user->profile->cidade}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">RUA</th>
+                                            <td>{{$user->profile->rua}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">NUMERO</th>
+                                            <td>{{$user->profile->numero}}</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                @endif
+
+                                </p>
                             <br>
                         </center>
                     </div>
@@ -61,7 +89,24 @@
             <div class="text-center">
                 {!! Button::primary('Voltar')->asLinkTo(route('admin.users.index'))->block() !!}
             </div>
+            <br/>
+            <div class="text-center">
+                {!!
+                    Button::danger('Remover')
+                     ->asLinkTo(route('admin.users.destroy', ['user' => $user->id]))
+                     ->block()->addAttributes(['onclick' => "event.preventDefault();document.getElementById(\"form-delete\").submit();"])
 
+                !!}
+            </div>
+            <?php
+
+              $formDelete = FormBuilder::plain([
+                  'id' => 'form-delete',
+                  'route' => ['admin.users.destroy','user' => $user->id],
+                  'method' => 'DELETE',
+                  'style' => 'display:none'
+              ]) ?>
+            {!! form($formDelete) !!}
         </div>
     </div>
 @endsection

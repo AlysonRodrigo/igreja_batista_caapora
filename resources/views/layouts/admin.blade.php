@@ -46,8 +46,8 @@
 
                             <ul class="dropdown-menu" role="menu">
                                 <li>
-                                    <a href="{{ route('admin.users.index') }}">Agenda</a>
-                                    <a href="{{ route('admin.users.index') }}">Notificação</a>
+                                    <a href="{{ route('admin.agenda.index') }}">Agenda</a>
+                                    <a href="{{ route('admin.noticia.index') }}">Noticias</a>
                                     <a href="{{ route('admin.users.index') }}">Aniversariantes do mês</a>
                                 </li>
                             </ul>
@@ -85,6 +85,11 @@
             </div>
         </nav>
 
+        @if(Session::has('message'))
+            <div class="container hidden-print">
+                {!! Alert::success(Session::get('message'))->close() !!}
+            </div>
+        @endif
         @yield('content')
     </div>
 

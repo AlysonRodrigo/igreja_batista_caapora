@@ -55,6 +55,8 @@ Route::prefix('admin')->group(function () {
         });
 
         Route::resource('users', 'UsersController');
+        Route::resource('agenda', 'AgendaController');
+        Route::resource('noticia', 'NoticiaController');
         $this->post('logout', 'Auth\LoginController@logout')->name('logout');
 
 

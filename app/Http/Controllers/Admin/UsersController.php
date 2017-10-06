@@ -43,6 +43,22 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
+        /** @var UserForm $form */
+        $form = \FormBuilder::create(UserForm::class);
+
+        if (!$form->isValid()) {
+            return redirect()
+                ->back()
+                ->withErrors($form->getErrors())
+                ->withInput();
+        }
+
+        $data = $form->getFieldValues();
+        $data['password'] = bcrypt($data['password']);
+        User::create($data);
+        $request->session()->flash('message', 'Usuário cadastro com sucesso');
+
+        return redirect()->route('admin.users.index');
 
     }
 
@@ -81,6 +97,9 @@ class UsersController extends Controller
             'model' => $user
         ]);
 
+        $form->remove('password');
+        $form->remove('role');
+
         return view('admin.users.edit',compact('form'));
     }
 
@@ -91,9 +110,24 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, User $user)
     {
-        //
+        $form = \FormBuilder::create(UserForm::class);
+
+
+        if (!$form->isValid()) {
+            return redirect()
+                ->back()
+                ->withErrors($form->getErrors())
+                ->withInput();
+        }
+
+
+        $data = array_except($form->getFieldValues(),['password','role']);
+        $user->fill($data);
+        $user->save();
+        $request->session()->flash('message', 'Usuário alterado com sucesso');
+        return redirect()->route('admin.users.index');
     }
 
     /**
@@ -102,8 +136,10 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        //
+        $user->delete();
+        return redirect()->route('admin.users.index');
+
     }
 }
